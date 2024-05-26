@@ -1,0 +1,9 @@
+cached_property
+matplotlib
+numpy
+pytest
+scipy
+sympy
+notebook
+
+
