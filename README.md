@@ -1,5 +1,8 @@
 # ULTRAWAVE
 
+If you’d like more details about the research behind this project, please check out my paper:
+Tian, Zixuan, Yun Jing, and Aiguo Han. "An Open-Source GPU-Based Acoustic Simulator for Fast and Accurate Modeling of Acoustic Scattering." 2024 IEEE Ultrasonics, Ferroelectrics, and Frequency Control Joint Symposium (UFFC-JS). IEEE, 2024. Link: https://ieeexplore.ieee.org/abstract/document/10793878. 
+
 ## Installation
 
 ### Python Virtual Environment
@@ -109,7 +112,7 @@ If you met an error similar to this [one](https://github.com/mpi4py/mpi4py/issue
 
 After environment setting up, you can run the python script with MPI in shell.
 
-    DEVITO_NPI=1 mpirun -n 4 elastic_3d.py
+    DEVITO_MPI=1 mpirun -n 4 python3 elastic_3d.py
 
 
 
