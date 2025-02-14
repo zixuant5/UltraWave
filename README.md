@@ -2,7 +2,7 @@
 
 If you’d like more details about the research behind this project, please check out my paper:
 
-Tian, Zixuan, Yun Jing, and Aiguo Han. "An Open-Source GPU-Based Acoustic Simulator for Fast and Accurate Modeling of Acoustic Scattering." 2024 IEEE Ultrasonics, Ferroelectrics, and Frequency Control Joint Symposium (UFFC-JS). IEEE, 2024. 
+Z. Tian, Y. Jing, and A. Han. "An Open-Source GPU-Based Acoustic Simulator for Fast and Accurate Modeling of Acoustic Scattering." 2024 IEEE Ultrasonics, Ferroelectrics, and Frequency Control Joint Symposium (UFFC-JS). IEEE, 2024. 
 
 Link: https://ieeexplore.ieee.org/abstract/document/10793878. 
 
