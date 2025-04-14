@@ -2,7 +2,7 @@ from devito import *
 import numpy as np
 from devito.builtins import initialize_function
 
-def Acoustic2DOperator(model, source=None, reciever=None):
+def Acoustic2DOperator(model, source=None, reciever=None, eta_1=None, eta_2=None, tau_1=None, tau_2=None):
     x, y = model.grid.dimensions
 
     p = TimeFunction(name='p', grid=model.grid, staggered=NODE, time_order=1, space_order=model.space_order)
@@ -63,10 +63,24 @@ def Acoustic2DOperator(model, source=None, reciever=None):
     eq_rho_damp_base_y = Eq(rho1y.forward, (1 - dt * d_b * alpha_max) * rho1y - dt * model.rho * vy_dy,
                             subdomain=model.grid.subdomains['base'])
 
-    op = Operator([eq_v_x, eq_v_y, eq_rho_x, eq_rho_y, eq_p, eq_v_damp_left_x, eq_rho_damp_left_x,
-                   eq_v_damp_right_x, eq_rho_damp_right_x,
-                   eq_v_damp_top_y, eq_rho_damp_top_y,
-                   eq_v_damp_base_y, eq_rho_damp_base_y] + src_rhox + src_rhoy + rec_term)
+    if eta_1 is None:
+        op = Operator([eq_v_x, eq_v_y, eq_rho_x, eq_rho_y, eq_p, eq_v_damp_left_x, eq_rho_damp_left_x,
+                       eq_v_damp_right_x, eq_rho_damp_right_x,
+                       eq_v_damp_top_y, eq_rho_damp_top_y,
+                       eq_v_damp_base_y, eq_rho_damp_base_y] + src_rhox + src_rhoy + rec_term)
+    else:
+        eq_p = Eq(p.forward,
+                  model.vp * model.vp * (1 + eta_1 / 2 + eta_2 / 2) ** 2 * (rho1x.forward + rho1y.forward) - S1 - S2)
+        eq_S1 = Eq(S1.forward,
+                   S1 - dt * (S1 / tau_1 - eta_1 / (tau_1 * (1 + eta_1 / 2 + eta_2 / 2) ** 2) * (p + S1 + S2)))
+        eq_S2 = Eq(S2.forward,
+                   S2 - dt * (S2 / tau_2 - eta_2 / (tau_2 * (1 + eta_1 / 2 + eta_2 / 2) ** 2) * (p + S1 + S2)))
+        op = Operator([eq_v_x, eq_v_y, eq_rho_x, eq_rho_y, eq_p, eq_S1, eq_S2,
+                       eq_v_damp_left_x, eq_rho_damp_left_x,
+                       eq_v_damp_right_x, eq_rho_damp_right_x,
+                       eq_v_damp_top_y, eq_rho_damp_top_y,
+                       eq_v_damp_base_y, eq_rho_damp_base_y] + src_rhox + src_rhoy + rec_term)
+
     return op
 
 
