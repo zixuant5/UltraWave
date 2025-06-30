@@ -44,8 +44,12 @@ To exit the environment
 
 ### Install UltraWave Toolbox
 
+First, you need to clone the folder by running:
+
+    git clone https://github.com/zixuant5/UltraWave.git
+
 To build and install the `ultrawave` package in-place, such that you can edit the files without 
-re-installing the package, run the following command at the `ultrawave` directory:
+re-installing the package, run the following command at the `UltraWave` directory:
 
     pip install --upgrade pip
     pip install . -r requirements.txt
