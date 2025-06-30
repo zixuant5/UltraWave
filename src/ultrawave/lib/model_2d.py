@@ -214,13 +214,9 @@ class SeismicModel(GenericModel):
         Buoyancy.
     vs : array_like or float
         S-wave velocity.
-    qp : array_like or float
-        P-wave attenuation.
-    qs : array_like or float
-        S-wave attenuation.
     """
-    _known_parameters = ['vp', 'rho', 'rho_sgx', 'rho_sgy', 'vs', 'b', 'epsilon', 'delta', 'alpha_coeff', 'alpha_power',
-                         'theta', 'phi', 'qp', 'qs', 'lam', 'mu', 'pml_x', 'pml_y']
+    _known_parameters = ['vp', 'rho', 'rho_sgx', 'rho_sgy', 'vs', 'b', 'epsilon', 'delta',
+                         'theta', 'phi', 'eta1', 'eta2', 'tau1', 'tau2', 'lam', 'mu', 'pml_x', 'pml_y']
 
     def __init__(self, origin, spacing, shape, space_order, vp, nbl=20, fs=False,
                  dtype=np.float32, subdomains=(), grid=None, **kwargs):

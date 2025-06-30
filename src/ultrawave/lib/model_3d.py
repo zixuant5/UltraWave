@@ -246,7 +246,7 @@ class SeismicModel(GenericModel):
         S-wave attenuation.
     """
     _known_parameters = ['vp', 'rho', 'rho_sgx', 'rho_sgy', 'rho_sgz', 'vs', 'b', 'epsilon', 'delta', 'alpha_coeff', 'alpha_power',
-                         'theta', 'phi', 'qp', 'qs', 'lam', 'mu', 'pml_x', 'pml_y', 'pml_z']
+                         'theta', 'phi','eta1', 'eta2', 'tau1', 'tau2', 'qp', 'qs', 'lam', 'mu', 'pml_x', 'pml_y', 'pml_z']
 
     def __init__(self, origin, spacing, shape, space_order, vp, nbl=20, fs=False,
                  dtype=np.float32, subdomains=(), grid=None, **kwargs):

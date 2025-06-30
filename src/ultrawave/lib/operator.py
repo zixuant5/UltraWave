@@ -2,10 +2,10 @@ from devito import *
 import numpy as np
 from devito.builtins import initialize_function
 
-def Acoustic2DOperator(model, source=None, reciever=None, eta_1=None, eta_2=None, tau_1=None, tau_2=None):
+def Acoustic2DOperator(model, source=None, reciever=None, p=None):
     x, y = model.grid.dimensions
 
-    p = TimeFunction(name='p', grid=model.grid, staggered=NODE, time_order=1, space_order=model.space_order)
+    p = p or TimeFunction(name='p', grid=model.grid, staggered=NODE, time_order=1, space_order=model.space_order)
     v1x = TimeFunction(name='vx', grid=model.grid, time_order=1, space_order=model.space_order, staggered=x)
     v1y = TimeFunction(name='vy', grid=model.grid, time_order=1, space_order=model.space_order, staggered=y)
     rho1x = TimeFunction(name='rhox', grid=model.grid, staggered=NODE, time_order=1, space_order=model.space_order)
@@ -63,18 +63,22 @@ def Acoustic2DOperator(model, source=None, reciever=None, eta_1=None, eta_2=None
     eq_rho_damp_base_y = Eq(rho1y.forward, (1 - dt * d_b * alpha_max) * rho1y - dt * model.rho * vy_dy,
                             subdomain=model.grid.subdomains['base'])
 
-    if eta_1 is None:
+    if not hasattr(model, 'eta1') or model.eta1 is None:
         op = Operator([eq_v_x, eq_v_y, eq_rho_x, eq_rho_y, eq_p, eq_v_damp_left_x, eq_rho_damp_left_x,
                        eq_v_damp_right_x, eq_rho_damp_right_x,
                        eq_v_damp_top_y, eq_rho_damp_top_y,
                        eq_v_damp_base_y, eq_rho_damp_base_y] + src_rhox + src_rhoy + rec_term)
     else:
+        S1 = TimeFunction(name='S1', grid=model.grid, staggered=NODE, time_order=1, space_order=model.space_order)
+        S2 = TimeFunction(name='S2', grid=model.grid, staggered=NODE, time_order=1, space_order=model.space_order)
+
         eq_p = Eq(p.forward,
-                  model.vp * model.vp * (1 + eta_1 / 2 + eta_2 / 2) ** 2 * (rho1x.forward + rho1y.forward) - S1 - S2)
+                  model.vp * model.vp * (1 + model.eta1 / 2 + model.eta2 / 2) ** 2 * (rho1x.forward + rho1y.forward) - S1 - S2)
         eq_S1 = Eq(S1.forward,
-                   S1 - dt * (S1 / tau_1 - eta_1 / (tau_1 * (1 + eta_1 / 2 + eta_2 / 2) ** 2) * (p + S1 + S2)))
+                   S1 - dt * (S1 / model.tau1 - model.eta1 / (model.tau1 * (1 + model.eta1 / 2 + model.eta2 / 2) ** 2) * (p + S1 + S2)))
         eq_S2 = Eq(S2.forward,
-                   S2 - dt * (S2 / tau_2 - eta_2 / (tau_2 * (1 + eta_1 / 2 + eta_2 / 2) ** 2) * (p + S1 + S2)))
+                   S2 - dt * (S2 / model.tau2 - model.eta2 / (model.tau2 * (1 + model.eta1 / 2 + model.eta2 / 2) ** 2) * (p + S1 + S2)))
+
         op = Operator([eq_v_x, eq_v_y, eq_rho_x, eq_rho_y, eq_p, eq_S1, eq_S2,
                        eq_v_damp_left_x, eq_rho_damp_left_x,
                        eq_v_damp_right_x, eq_rho_damp_right_x,
