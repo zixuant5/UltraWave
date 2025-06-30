@@ -1,17 +1,22 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: ultrawave
-Version: 0.1.0
+Version: 0.2.0
 Summary: ultrasound wave simulation toolbox
 Author-email: Zixuan Tian <zixuant5@illinois.edu>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/zixuant5/UltraWave
 Classifier: Programming Language :: Python :: 3
-Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6.0
 Description-Content-Type: text/markdown
+License-File: LICENSE
 Requires-Dist: devito
-Requires-Dist: jupyter
+Dynamic: license-file
 
 # ULTRAWAVE
+
+If you’d like more details about the research behind this project, please check out my paper:
+Tian, Zixuan, Yun Jing, and Aiguo Han. "An Open-Source GPU-Based Acoustic Simulator for Fast and Accurate Modeling of Acoustic Scattering." 2024 IEEE Ultrasonics, Ferroelectrics, and Frequency Control Joint Symposium (UFFC-JS). IEEE, 2024. Link: https://ieeexplore.ieee.org/abstract/document/10793878. 
 
 ## Installation
 
@@ -21,19 +26,16 @@ You can use the toolbox in a Python virtual environment using virtualenv:
 
 To install virtualenv
 
+    pip install --upgrade pip
     pip install virtualenv
 
-To create a dedicated virtual env in a directory (e.g., `ultrawave_venv`):
+To create a dedicated virtual env in the `ultrawave` directory (e.g., `ultrawave_venv`):
 
     python -m venv ultrawave_venv
 
-To enter this virtual env from terminal (e.g., Powershell) using Windows:
+To activate the virtual environment
 
-    ultrawave_venv/Scriptis/Activate.ps1
-
-For macOS users:
-
-    ultrawave_venv/bin/Activate.ps1
+    source ultrawave_venv/bin/activate
 
 To exit the vitual env
 
@@ -62,6 +64,16 @@ re-installing the package, run the following command at the `ultrawave` director
 
     pip install --upgrade pip
     pip install . -r requirements.txt
+
+For Windows users who use conda environment, if an error shows that 'pip' is not recognized, you can try:
+
+    conda install pip
+
+### Run Examples
+
+To run the jupyter notebook example, you can go to the `ultrawave` directory.
+
+    jupyter notebook
 
 ## GPU Acceleration
 
@@ -115,7 +127,7 @@ If you met an error similar to this [one](https://github.com/mpi4py/mpi4py/issue
 
 After environment setting up, you can run the python script with MPI in shell.
 
-    DEVITO_NPI=1 mpirun -n 4 elastic_3d.py
+    DEVITO_MPI=1 mpirun -n 4 python3 elastic_3d.py
 
 
 
