@@ -1,23 +1,27 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [project]
-name = 'ultrawave'
-version = '0.1.0'
-authors = [
-    {name = "Zixuan Tian", email = "zixuant5@illinois.edu"},
-]
+name = "ultrawave"
+version = "0.2.0"
 description = "ultrasound wave simulation toolbox"
 readme = "README.md"
 requires-python = ">=3.6.0"
+authors = [{ name = "Zixuan Tian", email = "zixuant5@illinois.edu" }]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
+    "Operating System :: OS Independent"
 ]
-dependencies = [
-    "devito",
-]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = ["devito"]
 
 [project.urls]
+Homepage = "https://github.com/zixuant5/UltraWave"
