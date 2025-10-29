@@ -60,7 +60,7 @@ For Windows users who use conda environment, if an error shows that 'pip' is not
 
     conda install pip
 
-You can run `pip show ultrawave` to check the version of ultrawave. The latest version now is 0.2.0.
+You can run `pip show ultrawave` to check the version of ultrawave. The latest version now is **0.2.0**.
 
 ### Run Examples
 
