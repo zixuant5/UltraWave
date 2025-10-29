@@ -51,16 +51,20 @@ First, you need to clone the folder by running:
 To build and install the `ultrawave` package in-place, such that you can edit the files without 
 re-installing the package, run the following command at the `UltraWave` directory:
 
+    cd UltraWave
     pip install --upgrade pip
-    pip install . -r requirements.txt
+    pip install -r requirements.txt
+    pip install -e .
 
 For Windows users who use conda environment, if an error shows that 'pip' is not recognized, you can try:
 
     conda install pip
 
+You can run `pip show ultrawave` to check the version of ultrawave. The latest version now is 0.2.0.
+
 ### Run Examples
 
-To run the jupyter notebook example, you can go to the `ultrawave` directory.
+To run the jupyter notebook example, you can go to the `UltraWave` directory.
 
     jupyter notebook
 
