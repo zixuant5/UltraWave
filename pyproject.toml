@@ -21,7 +21,7 @@ classifiers = [
 ]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
-dependencies = ["devito"]
+dependencies = ["devito==4.8.5"]
 
 [project.urls]
 Homepage = "https://github.com/zixuant5/UltraWave"
