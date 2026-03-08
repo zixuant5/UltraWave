@@ -1,7 +1,12 @@
 # ULTRAWAVE
 
-If you’d like more details about the research behind this project, please check out my paper:
-Tian, Zixuan, Yun Jing, and Aiguo Han. "An Open-Source GPU-Based Acoustic Simulator for Fast and Accurate Modeling of Acoustic Scattering." 2024 IEEE Ultrasonics, Ferroelectrics, and Frequency Control Joint Symposium (UFFC-JS). IEEE, 2024. Link: https://ieeexplore.ieee.org/abstract/document/10793878. 
+If you’d like more details about the research behind this project, please check out our papers:
+
+[1] Z. Tian, Y. Jing, and A. Han, "UltraWave: An Open-source Multi-GPU Full-wave Simulator for Acoustic and Elastic Wave Scattering in 3-D Heterogeneous Media," IEEE Transactions on Ultrasonics, 2025. Link: https://ieeexplore.ieee.org/abstract/document/11265733.
+
+[2] Z. Tian, Y. Jing, and A. Han, "An Open-Source GPU-Based Acoustic Simulator for Fast and Accurate Modeling of Acoustic Scattering," 2024 IEEE Ultrasonics, Ferroelectrics, and Frequency Control Joint Symposium (UFFC-JS). IEEE, 2024. Link: https://ieeexplore.ieee.org/abstract/document/10793878.
+
+[3] Z. Tian, Y. Jing, and A. Han, "Accurate and Efficient Modeling of Acoustic and Elastic Absorption in Medical Ultrasound Simulations," 2025 IEEE International Ultrasonics Symposium (IUS). IEEE, 2025. Link: https://ieeexplore.ieee.org/abstract/document/11201807.
 
 ## Installation
 
